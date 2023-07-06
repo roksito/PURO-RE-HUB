@@ -1,0 +1,53 @@
+local function press(a)
+    game:GetService("VirtualInputManager"):SendKeyEvent(true, tostring(a), false, game)
+end
+_G.autofarm = false;
+_G.collect = false;
+
+
+getgenv().Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/RTrade/Voidz/main/API/Networks/swordhook-network.lua"))() --you can go into the github link and copy all of it and modify it for yourself.
+getgenv().Window = getgenv().Library:CreateWindow('poop with friend', Vector2.new(550, 627), Enum.KeyCode.LeftShift) 
+
+local Test = Window:CreateTab("main")
+local Test2 = Test:CreateSector("farm tab","left")
+
+Test2:AddToggle("collect 500 time",false,function(state)
+getgenv().Collect = state
+coroutine.wrap(function()
+    while wait() do
+        if getgenv().Collect == true then
+            pcall(function()
+                for _,v in pairs(game:GetService("Workspace").poopholder.Hit4:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
+wait()
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+end
+end
+            end)
+        end
+        end
+        end)()
+        
+end)
+
+
+
+Test2:AddToggle("autofarm",false,function(state)
+getgenv().autofarm = state
+while getgenv().autofarm do
+wait(0.05)
+
+local args = {
+    [1] = Vector3.new(-0.6801947951316833, 0.733016312122345, 0.004705831874161959),
+    [2] = workspace:WaitForChild("unlocked parts"):WaitForChild("Part"),
+    [3] = Vector3.new(-208.08743286132812, 28.3541316986084, 218.2161102294922),
+    [4] = Vector3.new(-185.38790893554688, 3.891840934753418, 218.05908203125)
+}
+
+game:GetService("Players").LocalPlayer.Character:FindFirstChild("Poop Gun").FireWeapon:FireServer(unpack(args))
+end
+
+end)
+
+
