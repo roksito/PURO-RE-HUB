@@ -1,7 +1,5 @@
 --//Variables
 local games = {
-	[7346416636] = "https://raw.githubusercontent.com/iShield2005/scripts/master/ppt2",
-	[7313915417] = ""
 	[2546155523] = "https://raw.githubusercontent.com/roksito/PURO-RE-HUB/main/README.md"
 	
 }
