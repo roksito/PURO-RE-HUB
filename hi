@@ -1,7 +1,7 @@
 --//Variables
 local games = {
 	[2546155523] = "https://raw.githubusercontent.com/roksito/PURO-RE-HUB/main/README.md"
-	
+	[8110845141] = "https://raw.githubusercontent.com/roksito/PURO-RE-HUB/main/poopwithfriend"
 }
 --//Main Code
 if _G.shdscripts ~= nil then
