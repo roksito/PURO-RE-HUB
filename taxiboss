@@ -1,0 +1,89 @@
+local function press(a)
+    game:GetService("VirtualInputManager"):SendKeyEvent(true, tostring(a), false, game)
+end
+_G.autofarm = false;
+_G.ofi = false;
+_G.coco = false;
+
+getgenv().Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/RTrade/Voidz/main/API/Networks/swordhook-network.lua"))() --you can go into the github link and copy all of it and modify it for yourself.
+getgenv().Window = getgenv().Library:CreateWindow('taxi boss', Vector2.new(550, 627), Enum.KeyCode.LeftShift) 
+
+local Test = Window:CreateTab("main")
+local Test2 = Test:CreateSector("farm tab","left")
+local Te = Window:CreateTab("autofarm")
+
+
+Test2:AddToggle("Auto Coconuts",false,function(state)
+getgenv().coco = state
+game:GetService("ReplicatedStorage").Race.LeaveRace:InvokeServer()
+  while getgenv().coco  do
+              task.wait()
+              pcall(function()
+        if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+        if game:GetService("Players").LocalPlayer.variables.race.Value == "none" then
+          task.wait()
+  game:GetService("ReplicatedStorage").Race.JoinRace:InvokeServer("summerRace")
+  wait()
+  game:GetService("ReplicatedStorage").Race.StartRace:FireServer()
+      else
+      for i,v in pairs(game:GetService("Workspace").Races.summerRace.detects:GetChildren()) do
+          if v.ClassName == "Part" and v:FindFirstChild("TouchInterest") then
+           game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame)  
+      for i,v in pairs(game:GetService("Workspace").Races.summerRace.detects:GetChildren()) do
+          if v.ClassName == "Part" and v:FindFirstChild("TouchInterest") then
+            game.Players.LocalPlayer.Character.Humanoid.SeatPart.Velocity = Vector3.new(10,10,0)
+              firetouchinterest(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent.PrimaryPart,v,0)
+                      firetouchinterest(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent.PrimaryPart,v,1)
+          end
+      end
+          end
+      end
+      end
+    
+      elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false then
+          game:GetService("ReplicatedStorage").Vehicles.GetNearestSpot:InvokeServer(game:GetService("Players").LocalPlayer.variables.carId.Value)
+          wait(0.5)
+          game:GetService("ReplicatedStorage").Vehicles.EnterVehicleEvent:InvokeServer()
+      end
+    end)
+
+end
+end)
+
+
+Test2:AddToggle("Auto Upgrade Office",false,function(state)
+getgenv().ofi = state
+while getgenv().ofi do
+wait(0.05)
+    if not game:GetService("Players").LocalPlayer:FindFirstChild("Office") then
+game:GetService("ReplicatedStorage").Company.StartOffice:InvokeServer()
+wait(0.2)
+end
+ end
+end)
+
+
+
+
+Test2:AddToggle("auto money",false,function(state)
+getgenv().autofarm = state
+while getgenv().autofarm do
+wait(0.05)
+     if not  game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChild("contractBuildMaterial") then
+        game:GetService("ReplicatedStorage").Quests.Contracts.StartContract:InvokeServer("contractBuildMaterial")
+repeat task.wait()
+until game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChild("contractBuildMaterial")
+    end
+repeat task.wait()
+task.spawn(function()
+game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contractMaterial")
+game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contractMaterial")
+game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contractMaterial")
+end)
+until game:GetService("Players").LocalPlayer.ActiveQuests.contractBuildMaterial.Value == "!pw5pi3ps2"
+wait()
+game:GetService("ReplicatedStorage").Quests.Contracts.CompleteContract:InvokeServer()
+ end
+end)
+
+
